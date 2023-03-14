@@ -42,13 +42,13 @@ second_clean_2017
 
 second_clean_2015$timestamp <- as.Date(second_clean_2015$timestamp)
 second_clean_2015$year <- as.numeric(format(second_clean_2015$timestamp, "%Y"))
-third_clean_2015 %>% select(timestamp, year, everything())
+second_clean_2015 <- second_clean_2015 %>% select(timestamp, year, everything())
 
 
 
 second_clean_2016$timestamp <- as.Date(second_clean_2016$timestamp)
 second_clean_2016$year <- as.numeric(format(second_clean_2016$timestamp, "%Y"))
-third_clean_2016 %>% select(timestamp, year, everything())
+second_clean_2016 <- second_clean_2016 %>% select(timestamp, year, everything())
 
 
 ## standardising and simplifying column names
@@ -115,14 +115,14 @@ third_clean_2017 <- second_clean_2017 %>%
  third_clean_2016$age <- as.integer(third_clean_2016$age)
  third_clean_2017$age <- as.integer(second_clean_2017$age)
  
- third_clean_2016
+
  
  
  # remove the q1 etc from the 2017 column titles
  colnames(second_clean_2017) <- gsub("^.{3}", "", colnames(second_clean_2017))
 
  
- # searching for unique entries in country column to clean
+ # searching for unique entries in 2016 country column to clean
  sort(unique(third_clean_2016$country))
  
 
@@ -140,32 +140,74 @@ third_clean_2017 <- third_clean_2017 %>%
   mutate(country = na_if(country, ""))
 
 
-# removing other random answers from country - 2016
-
-na_test <- third_clean_2016 %>% 
-  mutate(country = as.character(country)) %>% 
-  mutate(country = case_when(
-    country == "A tropical island south of the equator"  | 
-      country == "Denial" |
-      country == "god's country" |
-      country == "Murica" |
-      country == "Neverland" |
-      country == "Not the USA or Canada" |
-      country == "one of the best ones" |
-      country == "See above" |
-      country == "Somewhere" |
-      country == "there isn't one for old men" |
-      country == "this one" |
-      country == "Trumpistan"  ~ NA_character_, 
-    TRUE ~ country
-  ))
-
-
- third_clean_2016 %>% 
-   count(is.na(country))
  
- na_test %>% 
-   count(is.na(country))
 
  
+ 
+ # searching for unique entries in 2016 country column to clean
+ sort(unique(third_clean_2017$country))
+ 
+ # changing all variants of us/Usa etc to USA
+ 
+ third_clean_2016 <- third_clean_2016 %>% 
+   mutate ( country = str_to_lower(third_clean_2016$country))
+ 
+ unique_names_country <- sort(unique(third_clean_2016$country))
+ unique_names_country
+ 
+ USA_names <-  c("the yoo ess of aaayyyyyy",                                                                         
+                 "trumpistan" ,                                                   
+                 "u.s.",  "merica",  "murica",
+                 "Sub-Canadian North America 'Merica",
+                 "united  states of america",                                   
+                 "america",  "the best one - usa",                                           
+                 "united sates",                                                                                                     
+                 "united states" ,                                                                                      
+                 "united stetes",                                                                                                  
+                 "us", "usa usa usa",                                                                                                              
+                 "usa usa usa usa",                                                                                                          
+                 "usa! usa!",                                                                                                     
+                 "usa!!!!!!",                                                                                                              
+                 "u.s.a.", "usa! usa! usa!", 
+                 "united state",
+                 "united states of america", 
+                 "units states",
+                 "usa", "usa!",
+                 "ussa","usa (i think but it's an election year so who can really tell)" ) 
+ 
+ 
+ fourth_clean_2016 <- third_clean_2016 %>% 
+   mutate (country = ifelse(third_clean_2016$country %in%  USA_names, 'USA', third_clean_2016$country))
+ 
+ unique_names_country_4 <- sort(unique(fourth_clean_2016$country))
+ 
+ 
+ # removing other random answers from country - 2016
+ 
+ fifth_clean_2016 <- fourth_clean_2016 %>% 
+   mutate(country = as.character(country)) %>% 
+   mutate(country = case_when(
+     country == "a tropical island south of the equator"  |
+       country == "cascadia" |
+       country == "denial" |
+       country == "god's country" |
+       country == "there isn't one for old men" |
+       country == "neverland" |
+       country == "not the USA or Canada" |
+       country == "one of the best ones" |
+       country == "see above" |
+       country == "somewhere" |
+       country == "the republic of Cascadia" |
+       country == "this one"
+     ~ NA_character_, 
+     TRUE ~ country
+   ))
+ 
+ 
+ 
+ 
+
+
+
+
 
