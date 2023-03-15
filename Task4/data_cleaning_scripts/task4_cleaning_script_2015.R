@@ -39,7 +39,14 @@ third_clean_2015 <- second_clean_2015 %>%
 
 
 #convert age to from character to number
+
 third_clean_2015$age <- as.integer(third_clean_2015$age)
+
+
+
+ # removing timestamp column
+
+third_clean_2015 <- third_clean_2015[ -c(1)]
 
 
 

@@ -173,8 +173,14 @@ fifth_clean_2017 <- fourth_clean_2017 %>%
 sort(unique(fifth_clean_2017$country))
 
 
+fifth_clean_2017 %>% 
+  count(is.na(age))
+
+second_clean_2017 %>% 
+  count(is.na(age))
 
 
+sixth_clean_2017 <-  select (fifth_clean_2017, -state_province_county_etc, -joy_other, - despair_other)
 
 
 

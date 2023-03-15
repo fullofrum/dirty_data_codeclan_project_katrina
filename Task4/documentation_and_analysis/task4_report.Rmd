@@ -1,0 +1,35 @@
+---
+title: "Task 4 Report"
+output: html_document
+date: "2023-03-15"
+---
+For your chosen task to present we would like you to write a markdown report document describing your project. This document should include:
+
+A brief introduction to the dataset
+A list of any assumptions you have made
+The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).
+The answers to the questions presented in the task brief
+Any other interesting analyses or conclusions you come across.
+
+
+Introduction
+The data we were presented with comprised 3 separate excel files containing information gathered over 3 years regarding the habits and sweet preferences of individuals on Halloween.  They contained personal information (eg. age, gender), social habits (going out on Halloween) as well as a substantial list of sweets which were rated according to "JOY", "DESPAIR" and "MEH".
+
+Cleaning
+The inital cleaning process involved passing all the datasets through Janitor clean_names to remove capitals and other puctuation from the column heads.
+
+
+```{r}
+first_clean_2015 <- clean_names(boing_boing_candy_2015)
+```
+
+
+We had several discussions about our remit as data analysts before we started cleaning the data.  Included in the data sets were information outwith the topic of 'candy' including drinks (eg. kale smoothie and mint julep), drugs (vicadin) and bread products (white bread).  We decided to remove any item which was not a sweet or something that could conceivably be given to Trick or Treaters.  This meant keeping food related items including healthy_fruit and box_o_raisins since some parents like to give Trick or Treaters and option to be more healthy.  The rest of the food columns and columns which seemed irrlevant to the dataset (Real Housewives of Orange County Season 9 Blue-Ray) were removed.
+
+```{r}
+second_clean_2017 <- first_clean_2017[ -c(1,12,21,22,26,27,31,43,46,48,49,68,69,72,81,92,96,104,105,107,108,112:120) ]
+```
+
+Two of the datasets had a timestamp which contained a year - the year data was extracted into a new column.
+
+

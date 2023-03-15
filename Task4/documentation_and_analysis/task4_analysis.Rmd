@@ -2,4 +2,154 @@
 title: "task4_analysis"
 output: html_notebook
 ---
+```{r}
+library(tidyverse)
+library(janitor)
+library(tidyr)
+library(readxl)
+library(lubridate)
+library(here)
+library(stringr)
+```
+
+
+
+
+```{r}
+full_candy <- read_csv(here::here("clean_data/full_candy.csv"), show_col_types = FALSE)
+```
+
+
+
+Question 1
+What is the total number of candy ratings given across the three years. (Number of candy ratings, not the number of raters. Don’t count missing values)
+
+```{r}
+full_candy %>% 
+  names()
+
+candies_only <- select(full_candy, -year, -age, -going_out,
+                       -country, -gender)
+names(candies_only)
+
+sum(!is.na(candies_only))
+
+
+# [1] 629523
+
+```
+
+
+
+
+Question 2
+What was the average age of people who are going out trick or treating?
+
+```{r}
+going_out <- subset(full_candy, going_out == "Yes" & age >= 1 & age <= 100)
+
+mean(going_out$age, na.rm = TRUE)
+
+# [1] 35.01952
+```
+
+
+Question 3
+What was the average age of people who are not going trick or treating?
+
+```{r}
+going_out <- subset(full_candy, going_out == "No" & age >= 1 & age <= 100)
+
+mean(going_out$age, na.rm = TRUE)
+
+
+# [1] 39.14549
+```
+
+
+
+
+Question 4
+For each of joy, despair and meh, which candy bar received the most of these ratings?
+
+```{r}
+ # pivoting table to longer
+
+candies_only_long  <- pivot_longer(candies_only,
+                                   cols = c(1:97),
+                                   names_to = "candy",
+                                   values_to = "feelings")
+
+ # grouping by candy
+
+candies_grouped <- candies_only_long %>% 
+  group_by(candy)  
+candies_grouped <- candies_only_long %>% 
+  count(candy, feelings) 
+
+
+ # selecting for joy
+
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  slice_max(feelings == "JOY") %>% 
+  arrange(desc(n))
+
+ # any_full_sized_candy_bar	JOY	7589	
+
+
+
+ # selecting for meh
+
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  slice_max(feelings == "MEH") %>% 
+  arrange(desc(n))
+
+# lollipops	MEH	1570	
+
+
+
+# selecting for despair
+
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  slice_max(feelings == "DESPAIR") %>% 
+  arrange(desc(n))
+
+# broken_glow_stick	DESPAIR	7905	
+
+
+```
+
+
+
+Question 5
+How many people rated Starburst as despair?
+```{r}
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  filter(candy == "starburst", feelings == "DESPAIR")
+
+
+```
+
+
+
+For the next three questions, count despair as -1, joy as +1, and meh as 0.
+
+Question 6
+What was the most popular candy bar by this rating system for each gender in the dataset ?
+
+```{r}
+candies_only_q6 <- select(full_candy, -year, -age, -going_out,
+                       -country)
+
+candies_only_long_q6  <- pivot_longer(candies_only,
+                                   cols = c(1:97),
+                                   names_to = "candy",
+                                   values_to = "feelings"
+                                   )
+```
+
 

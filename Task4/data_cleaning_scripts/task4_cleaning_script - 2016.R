@@ -194,17 +194,42 @@ fifth_clean_2016 <- fourth_clean_2016 %>% mutate(country = case_when(country %in
                                                                      TRUE  ~ as.character(country)))
                                                   
 
-fifth_clean_2016_test %>% 
-count(is.na(country))
+
 
 third_clean_2016 %>% 
-  count(is.na(country))
+  count(is.na(age))
 
 
 sort(unique(fifth_clean_2016_test$country))
 
 
 
+# removing columns we don't need for analysis
+
+sixth_clean_2016 <-  select (fifth_clean_2016, -timestamp, -state_province_county_etc, -york_peppermint_patties_ignore)
+
+
+
+
+
+
+
+fifth_clean_2016_test %>% 
+  count(is.na(age))
+
+
+
+
+
+#######  changing code to make it cleaner???
+
+fifth_clean_2016 <- fifth_clean_2016 %>% 
+  mutate (country =  str_to_title(country)) # capitalise
+10:59
+fifth_clean_2016 <- fifth_clean_2016 %>% 
+  mutate(country = case_when(country == "Usa" ~ "USA",
+                             country == "Uk" ~ "UK",
+                             TRUE ~ country)) # to capitalise USA
 
 
 
@@ -215,24 +240,3 @@ sort(unique(fifth_clean_2016_test$country))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-head(fourth_clean_2017$country,500)
-
-fifth_clean_2017 <- fourth_clean_2017 %>%
-  mutate(country = case_when(
-    ...
-  )
-  )

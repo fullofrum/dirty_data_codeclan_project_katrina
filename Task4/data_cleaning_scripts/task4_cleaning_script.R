@@ -206,8 +206,34 @@ third_clean_2017 <- third_clean_2017 %>%
  
  
  
+ clean_data_2015 <- third_clean_2015
+ clean_data_2016 <- sixth_clean_2016
+ clean_data_2017 <- sixth_clean_2017
+ 
+ write.csv(clean_data_2015, "clean_data/clean_data_2015", row.names = FALSE)
+ clean_data_2015 
+ 
+ write.csv(clean_data_2016, "clean_data/clean_data_2016", row.names = FALSE)
+ clean_data_2016 
+ 
+ write.csv(clean_data_2017, "clean_data/clean_data_2017", row.names = FALSE)
+ clean_data_2017 
 
+ 
+# rerunning clean names to replace x in front of 100 grand bars
+ 
+ clean_names(sixth_clean_2017)
 
+ 
+ # join dataframes together
+ 
+test_join_2015_2016 <- full_join(third_clean_2015, sixth_clean_2016)
+test_join_full <- full_join(test_join_2015_2016, sixth_clean_2017)
+
+# exporting joined data frame
+
+full_candy <- test_join_full
+write.csv(full_candy, "clean_data/full_candy.csv", row.names = FALSE)
 
 
 

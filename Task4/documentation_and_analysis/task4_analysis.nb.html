@@ -1753,8 +1753,220 @@ display: none;
 
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(tidyverse)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4yIOKUgOKUgOKclCBnZ3Bsb3QyIDMuNC4wICAgICAg4pyUIHB1cnJyICAgMS4wLjEgXG7inJQgdGliYmxlICAzLjEuOCAgICAgIOKclCBkcGx5ciAgIDEuMC4xMFxu4pyUIHRpZHlyICAgMS4yLjEgICAgICDinJQgc3RyaW5nciAxLjUuMCBcbuKclCByZWFkciAgIDIuMS4zICAgICAg4pyUIGZvcmNhdHMgMC41LjIg4pSA4pSAIENvbmZsaWN0cyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlX2NvbmZsaWN0cygpIOKUgOKUgFxu4pyWIGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbuKcliBkcGx5cjo6bGFnKCkgICAgbWFza3Mgc3RhdHM6OmxhZygpXG4ifQ== -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.2 ──✔ ggplot2 3.4.0      ✔ purrr   1.0.1 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+✔ readr   2.1.3      ✔ forcats 0.5.2 ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShqYW5pdG9yKVxuYGBgIn0= -->
+<pre class="r"><code>library(janitor)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYamFuaXRvcuKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdHMgYXJlIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6c3RhdHPigJk6XG5cbiAgICBjaGlzcS50ZXN0LCBmaXNoZXIudGVzdFxuIn0= -->
+<pre><code>
+Attaching package: ‘janitor’
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAidGFzazRfYW5hbHlzaXMiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCg==</div>
+The following objects are masked from ‘package:stats’:
+
+    chisq.test, fisher.test</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5cilcbmxpYnJhcnkocmVhZHhsKVxubGlicmFyeShsdWJyaWRhdGUpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyr)
+library(readxl)
+library(lubridate)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiB0aW1lY2hhbmdlXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhsdWJyaWRhdGXigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBkYXRlLCBpbnRlcnNlY3QsIHNldGRpZmYsIHVuaW9uXG4ifQ== -->
+<pre><code>Loading required package: timechange
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoZXJlKVxuYGBgIn0= -->
+<pre class="r"><code>library(here)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiaGVyZSgpIHN0YXJ0cyBhdCAvVXNlcnMvS2F0L0NvZGVDbGFuL2RpcnR5X2RhdGFfY29kZWNsYW5fcHJvamVjdF9rYXRyaW5hX2xlYXIvVGFzazRcbiJ9 -->
+<pre><code>here() starts at /Users/Kat/CodeClan/dirty_data_codeclan_project_katrina_lear/Task4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdHJpbmdyKVxuYGBgIn0= -->
+<pre class="r"><code>library(stringr)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 1 What is the total number of candy ratings given across the
+three years. (Number of candy ratings, not the number of raters. Don’t
+count missing values)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnVsbF9jYW5keSAlPiUgXG4gIG5hbWVzKClcblxuYGBgIn0= -->
+<pre class="r"><code>full_candy %&gt;% 
+  names()
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICBbMV0gXCJ5ZWFyXCIgICAgICAgICAgICAgICAgICAgICAgIFwiYWdlXCIgICAgICAgICAgICAgICAgICAgICAgICBcImdvaW5nX291dFwiICAgICAgICAgICAgICAgICAgXCJidXR0ZXJmaW5nZXJcIiAgICAgICAgICAgICAgXG4gIFs1XSBcIngxMDBfZ3JhbmRfYmFyXCIgICAgICAgICAgICAgXCJtYXJ5X2phbmVzMlwiICAgICAgICAgICAgICAgIFwiYW55X2Z1bGxfc2l6ZWRfY2FuZHlfYmFyXCIgICBcImJsYWNrX2phY2tzXCIgICAgICAgICAgICAgICBcbiAgWzldIFwiYm9ua2Vyc190aGVfY2FuZHlcIiAgICAgICAgICBcImJvdHRsZV9jYXBzXCIgICAgICAgICAgICAgICAgXCJib3hfb19yYWlzaW5zXCIgICAgICAgICAgICAgIFwiYnJhY2hfcHJvZHVjdFwiICAgICAgICAgICAgIFxuIFsxM10gXCJidWJibGVfZ3VtXCIgICAgICAgICAgICAgICAgIFwiY2FkYnVyeV9jcmVtZV9lZ2dzXCIgICAgICAgICBcImNhbmR5X2Nvcm5cIiAgICAgICAgICAgICAgICAgXCJmcmVlX3Jlc3RhdXJhbnRfY2FuZHlcIiAgICAgXG4gWzE3XSBcImNoaWNsZXRzXCIgICAgICAgICAgICAgICAgICAgXCJjYXJhbWVsbG9zXCIgICAgICAgICAgICAgICAgIFwic25pY2tlcnNcIiAgICAgICAgICAgICAgICAgICBcImRhcmtfY2hvY29sYXRlX2hlcnNoZXlcIiAgICBcbiBbMjFdIFwiZG90c1wiICAgICAgICAgICAgICAgICAgICAgICBcImZ1enp5X3BlYWNoZXNcIiAgICAgICAgICAgICAgXCJnbG93X3N0aWNrc1wiICAgICAgICAgICAgICAgIFwiYnJva2VuX2dsb3dfc3RpY2tcIiAgICAgICAgIFxuIFsyNV0gXCJnb29fZ29vX2NsdXN0ZXJzXCIgICAgICAgICAgIFwiZ29vZF9uX3BsZW50eVwiICAgICAgICAgICAgICBcImd1bV9mcm9tX2Jhc2ViYWxsX2NhcmRzXCIgICAgXCJndW1teV9iZWFyc19zdHJhaWdodF91cFwiICAgXG4gWzI5XSBcImhlYWx0aHlfZnJ1aXRcIiAgICAgICAgICAgICAgXCJoZWF0aF9iYXJcIiAgICAgICAgICAgICAgICAgIFwiaGVyc2hleXNfa2lzc2VzXCIgICAgICAgICAgICBcImhlcnNoZXlzX21pbGtfY2hvY29sYXRlXCIgICBcbiBbMzNdIFwiam9sbHlfcmFuY2hlcnNfYmFkX2ZsYXZvclwiICBcImpvbGx5X3JhbmNoZXJzX2dvb2RfZmxhdm9yXCIgXCJraW5kZXJfaGFwcHlfaGlwcG9cIiAgICAgICAgIFwia2l0X2thdFwiICAgICAgICAgICAgICAgICAgIFxuIFszN10gXCJoYXJkX2NhbmR5XCIgICAgICAgICAgICAgICAgIFwibGVtb25faGVhZHNcIiAgICAgICAgICAgICAgICBcImxpY29yaWNlXCIgICAgICAgICAgICAgICAgICAgXCJsaWNvcmljZV9ub3RfYmxhY2tcIiAgICAgICAgXG4gWzQxXSBcImxpbmR0X3RydWZmbGVcIiAgICAgICAgICAgICAgXCJsb2xsaXBvcHNcIiAgICAgICAgICAgICAgICAgIFwibWFyc1wiICAgICAgICAgICAgICAgICAgICAgICBcIm1hcnlfamFuZXNcIiAgICAgICAgICAgICAgICBcbiBbNDVdIFwibWF5bmFyZHNcIiAgICAgICAgICAgICAgICAgICBcIm1pbGtfZHVkc1wiICAgICAgICAgICAgICAgICAgXCJsYWZmeV90YWZmeVwiICAgICAgICAgICAgICAgIFwibWluaWJhZ3Nfb2ZfY2hpcHNcIiAgICAgICAgIFxuIFs0OV0gXCJyZWdnaWVfamFja3Nvbl9iYXJcIiAgICAgICAgIFwicGl4eV9zdGl4XCIgICAgICAgICAgICAgICAgICBcIm5lcmRzXCIgICAgICAgICAgICAgICAgICAgICAgXCJuZXN0bGVfY3J1bmNoXCIgICAgICAgICAgICAgXG4gWzUzXSBcIm5vd25fbGF0ZXJzXCIgICAgICAgICAgICAgICAgXCJwZW5jaWxzXCIgICAgICAgICAgICAgICAgICAgIFwibWlsa3lfd2F5XCIgICAgICAgICAgICAgICAgICBcInJlZXNlc19wZWFudXRfYnV0dGVyX2N1cHNcIiBcbiBbNTddIFwidG9ibGVyb25lXCIgICAgICAgICAgICAgICAgICBcInJ1bnRzXCIgICAgICAgICAgICAgICAgICAgICAgXCJqdW5pb3JfbWludHNcIiAgICAgICAgICAgICAgIFwibWludF9raXNzZXNcIiAgICAgICAgICAgICAgIFxuIFs2MV0gXCJtaW50X2xlYXZlc1wiICAgICAgICAgICAgICAgIFwicGVhbnV0X21fbXNcIiAgICAgICAgICAgICAgICBcInJlZ3VsYXJfbV9tc1wiICAgICAgICAgICAgICAgXCJtaW50X21fbXNcIiAgICAgICAgICAgICAgICAgXG4gWzY1XSBcInJpYmJvbl9jYW5keVwiICAgICAgICAgICAgICAgXCJyb2xvc1wiICAgICAgICAgICAgICAgICAgICAgIFwic2tpdHRsZXNcIiAgICAgICAgICAgICAgICAgICBcInNtYXJ0aWVzX2FtZXJpY2FuXCIgICAgICAgICBcbiBbNjldIFwic21hcnRpZXNfY29tbW9ud2VhbHRoXCIgICAgICBcImNoaWNrX29fc3RpY2tzXCIgICAgICAgICAgICAgXCJzdGFyYnVyc3RcIiAgICAgICAgICAgICAgICAgIFwic3dlZGlzaF9maXNoXCIgICAgICAgICAgICAgIFxuIFs3M10gXCJvZGRfbWFyc2htYWxsb3dfcGVhbnV0XCIgICAgIFwidGhyZWVfbXVza2V0ZWVyc1wiICAgICAgICAgICBcInBlYW51dF9idXR0ZXJfYmFyc1wiICAgICAgICAgXCJwZWFudXRfYnV0dGVyX2phcnNcIiAgICAgICAgXG4gWzc3XSBcInRyYWlsX21peFwiICAgICAgICAgICAgICAgICAgXCJ0d2l4XCIgICAgICAgICAgICAgICAgICAgICAgIFwieW9ya19wZXBwZXJtaW50X3BhdHRpZXNcIiAgICBcIm5lY2NvX3dhZmVyc1wiICAgICAgICAgICAgICBcbiBbODFdIFwiZ2VuZGVyXCIgICAgICAgICAgICAgICAgICAgICBcImNvdW50cnlcIiAgICAgICAgICAgICAgICAgICAgXCJjb2ZmZWVfY3Jpc3BcIiAgICAgICAgICAgICAgIFwiZG92ZV9iYXJzXCIgICAgICAgICAgICAgICAgIFxuIFs4NV0gXCJoZXJzaGV5c19kYXJrX2Nob2NvbGF0ZVwiICAgIFwibGljb3JpY2VfeWVzX2JsYWNrXCIgICAgICAgICBcIm1pa2VfYW5kX2lrZVwiICAgICAgICAgICAgICAgXCJibHVlX21fbXNcIiAgICAgICAgICAgICAgICAgXG4gWzg5XSBcInJlZF9tX21zXCIgICAgICAgICAgICAgICAgICAgXCJ0aGlyZF9wYXJ0eV9tX21zXCIgICAgICAgICAgIFwibXJfZ29vZGJhclwiICAgICAgICAgICAgICAgICBcInBlZXBzXCIgICAgICAgICAgICAgICAgICAgICBcbiBbOTNdIFwicmVlc2VzX3BpZWNlc1wiICAgICAgICAgICAgICBcInNvdXJwYXRjaF9raWRzXCIgICAgICAgICAgICAgXCJzd2VldF90YXJ0c1wiICAgICAgICAgICAgICAgIFwidGljX3RhY3NcIiAgICAgICAgICAgICAgICAgIFxuIFs5N10gXCJvZGRfbWFyc2htYWxsb3dfcGVhbnV0c1wiICAgIFwid2hhdGNoYW1hY2FsbGl0X2JhcnNcIiAgICAgICBcIjEwMF9ncmFuZF9iYXJcIiAgICAgICAgICAgICAgXCJncmVlbl9wYXJ0eV9tX21zXCIgICAgICAgICAgXG5bMTAxXSBcImJvb19iZXJyeV9jcnVuY2hcIiAgICAgICAgICAgXCJ0YWtlXzVcIiAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code>  [1] &quot;year&quot;                       &quot;age&quot;                        &quot;going_out&quot;                  &quot;butterfinger&quot;              
+  [5] &quot;x100_grand_bar&quot;             &quot;mary_janes2&quot;                &quot;any_full_sized_candy_bar&quot;   &quot;black_jacks&quot;               
+  [9] &quot;bonkers_the_candy&quot;          &quot;bottle_caps&quot;                &quot;box_o_raisins&quot;              &quot;brach_product&quot;             
+ [13] &quot;bubble_gum&quot;                 &quot;cadbury_creme_eggs&quot;         &quot;candy_corn&quot;                 &quot;free_restaurant_candy&quot;     
+ [17] &quot;chiclets&quot;                   &quot;caramellos&quot;                 &quot;snickers&quot;                   &quot;dark_chocolate_hershey&quot;    
+ [21] &quot;dots&quot;                       &quot;fuzzy_peaches&quot;              &quot;glow_sticks&quot;                &quot;broken_glow_stick&quot;         
+ [25] &quot;goo_goo_clusters&quot;           &quot;good_n_plenty&quot;              &quot;gum_from_baseball_cards&quot;    &quot;gummy_bears_straight_up&quot;   
+ [29] &quot;healthy_fruit&quot;              &quot;heath_bar&quot;                  &quot;hersheys_kisses&quot;            &quot;hersheys_milk_chocolate&quot;   
+ [33] &quot;jolly_ranchers_bad_flavor&quot;  &quot;jolly_ranchers_good_flavor&quot; &quot;kinder_happy_hippo&quot;         &quot;kit_kat&quot;                   
+ [37] &quot;hard_candy&quot;                 &quot;lemon_heads&quot;                &quot;licorice&quot;                   &quot;licorice_not_black&quot;        
+ [41] &quot;lindt_truffle&quot;              &quot;lollipops&quot;                  &quot;mars&quot;                       &quot;mary_janes&quot;                
+ [45] &quot;maynards&quot;                   &quot;milk_duds&quot;                  &quot;laffy_taffy&quot;                &quot;minibags_of_chips&quot;         
+ [49] &quot;reggie_jackson_bar&quot;         &quot;pixy_stix&quot;                  &quot;nerds&quot;                      &quot;nestle_crunch&quot;             
+ [53] &quot;nown_laters&quot;                &quot;pencils&quot;                    &quot;milky_way&quot;                  &quot;reeses_peanut_butter_cups&quot; 
+ [57] &quot;toblerone&quot;                  &quot;runts&quot;                      &quot;junior_mints&quot;               &quot;mint_kisses&quot;               
+ [61] &quot;mint_leaves&quot;                &quot;peanut_m_ms&quot;                &quot;regular_m_ms&quot;               &quot;mint_m_ms&quot;                 
+ [65] &quot;ribbon_candy&quot;               &quot;rolos&quot;                      &quot;skittles&quot;                   &quot;smarties_american&quot;         
+ [69] &quot;smarties_commonwealth&quot;      &quot;chick_o_sticks&quot;             &quot;starburst&quot;                  &quot;swedish_fish&quot;              
+ [73] &quot;odd_marshmallow_peanut&quot;     &quot;three_musketeers&quot;           &quot;peanut_butter_bars&quot;         &quot;peanut_butter_jars&quot;        
+ [77] &quot;trail_mix&quot;                  &quot;twix&quot;                       &quot;york_peppermint_patties&quot;    &quot;necco_wafers&quot;              
+ [81] &quot;gender&quot;                     &quot;country&quot;                    &quot;coffee_crisp&quot;               &quot;dove_bars&quot;                 
+ [85] &quot;hersheys_dark_chocolate&quot;    &quot;licorice_yes_black&quot;         &quot;mike_and_ike&quot;               &quot;blue_m_ms&quot;                 
+ [89] &quot;red_m_ms&quot;                   &quot;third_party_m_ms&quot;           &quot;mr_goodbar&quot;                 &quot;peeps&quot;                     
+ [93] &quot;reeses_pieces&quot;              &quot;sourpatch_kids&quot;             &quot;sweet_tarts&quot;                &quot;tic_tacs&quot;                  
+ [97] &quot;odd_marshmallow_peanuts&quot;    &quot;whatchamacallit_bars&quot;       &quot;100_grand_bar&quot;              &quot;green_party_m_ms&quot;          
+[101] &quot;boo_berry_crunch&quot;           &quot;take_5&quot;                    </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2FuZGllc19vbmx5IDwtIHNlbGVjdChmdWxsX2NhbmR5LCAteWVhciwgLWFnZSwgLWdvaW5nX291dCxcbiAgICAgICAgICAgICAgICAgICAgICAgLWNvdW50cnksIC1nZW5kZXIpXG5uYW1lcyhjYW5kaWVzX29ubHkpXG5gYGAifQ== -->
+<pre class="r"><code>candies_only &lt;- select(full_candy, -year, -age, -going_out,
+                       -country, -gender)
+names(candies_only)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcImJ1dHRlcmZpbmdlclwiICAgICAgICAgICAgICAgXCJ4MTAwX2dyYW5kX2JhclwiICAgICAgICAgICAgIFwibWFyeV9qYW5lczJcIiAgICAgICAgICAgICAgICBcImFueV9mdWxsX3NpemVkX2NhbmR5X2JhclwiICBcbiBbNV0gXCJibGFja19qYWNrc1wiICAgICAgICAgICAgICAgIFwiYm9ua2Vyc190aGVfY2FuZHlcIiAgICAgICAgICBcImJvdHRsZV9jYXBzXCIgICAgICAgICAgICAgICAgXCJib3hfb19yYWlzaW5zXCIgICAgICAgICAgICAgXG4gWzldIFwiYnJhY2hfcHJvZHVjdFwiICAgICAgICAgICAgICBcImJ1YmJsZV9ndW1cIiAgICAgICAgICAgICAgICAgXCJjYWRidXJ5X2NyZW1lX2VnZ3NcIiAgICAgICAgIFwiY2FuZHlfY29yblwiICAgICAgICAgICAgICAgIFxuWzEzXSBcImZyZWVfcmVzdGF1cmFudF9jYW5keVwiICAgICAgXCJjaGljbGV0c1wiICAgICAgICAgICAgICAgICAgIFwiY2FyYW1lbGxvc1wiICAgICAgICAgICAgICAgICBcInNuaWNrZXJzXCIgICAgICAgICAgICAgICAgICBcblsxN10gXCJkYXJrX2Nob2NvbGF0ZV9oZXJzaGV5XCIgICAgIFwiZG90c1wiICAgICAgICAgICAgICAgICAgICAgICBcImZ1enp5X3BlYWNoZXNcIiAgICAgICAgICAgICAgXCJnbG93X3N0aWNrc1wiICAgICAgICAgICAgICAgXG5bMjFdIFwiYnJva2VuX2dsb3dfc3RpY2tcIiAgICAgICAgICBcImdvb19nb29fY2x1c3RlcnNcIiAgICAgICAgICAgXCJnb29kX25fcGxlbnR5XCIgICAgICAgICAgICAgIFwiZ3VtX2Zyb21fYmFzZWJhbGxfY2FyZHNcIiAgIFxuWzI1XSBcImd1bW15X2JlYXJzX3N0cmFpZ2h0X3VwXCIgICAgXCJoZWFsdGh5X2ZydWl0XCIgICAgICAgICAgICAgIFwiaGVhdGhfYmFyXCIgICAgICAgICAgICAgICAgICBcImhlcnNoZXlzX2tpc3Nlc1wiICAgICAgICAgICBcblsyOV0gXCJoZXJzaGV5c19taWxrX2Nob2NvbGF0ZVwiICAgIFwiam9sbHlfcmFuY2hlcnNfYmFkX2ZsYXZvclwiICBcImpvbGx5X3JhbmNoZXJzX2dvb2RfZmxhdm9yXCIgXCJraW5kZXJfaGFwcHlfaGlwcG9cIiAgICAgICAgXG5bMzNdIFwia2l0X2thdFwiICAgICAgICAgICAgICAgICAgICBcImhhcmRfY2FuZHlcIiAgICAgICAgICAgICAgICAgXCJsZW1vbl9oZWFkc1wiICAgICAgICAgICAgICAgIFwibGljb3JpY2VcIiAgICAgICAgICAgICAgICAgIFxuWzM3XSBcImxpY29yaWNlX25vdF9ibGFja1wiICAgICAgICAgXCJsaW5kdF90cnVmZmxlXCIgICAgICAgICAgICAgIFwibG9sbGlwb3BzXCIgICAgICAgICAgICAgICAgICBcIm1hcnNcIiAgICAgICAgICAgICAgICAgICAgICBcbls0MV0gXCJtYXJ5X2phbmVzXCIgICAgICAgICAgICAgICAgIFwibWF5bmFyZHNcIiAgICAgICAgICAgICAgICAgICBcIm1pbGtfZHVkc1wiICAgICAgICAgICAgICAgICAgXCJsYWZmeV90YWZmeVwiICAgICAgICAgICAgICAgXG5bNDVdIFwibWluaWJhZ3Nfb2ZfY2hpcHNcIiAgICAgICAgICBcInJlZ2dpZV9qYWNrc29uX2JhclwiICAgICAgICAgXCJwaXh5X3N0aXhcIiAgICAgICAgICAgICAgICAgIFwibmVyZHNcIiAgICAgICAgICAgICAgICAgICAgIFxuWzQ5XSBcIm5lc3RsZV9jcnVuY2hcIiAgICAgICAgICAgICAgXCJub3duX2xhdGVyc1wiICAgICAgICAgICAgICAgIFwicGVuY2lsc1wiICAgICAgICAgICAgICAgICAgICBcIm1pbGt5X3dheVwiICAgICAgICAgICAgICAgICBcbls1M10gXCJyZWVzZXNfcGVhbnV0X2J1dHRlcl9jdXBzXCIgIFwidG9ibGVyb25lXCIgICAgICAgICAgICAgICAgICBcInJ1bnRzXCIgICAgICAgICAgICAgICAgICAgICAgXCJqdW5pb3JfbWludHNcIiAgICAgICAgICAgICAgXG5bNTddIFwibWludF9raXNzZXNcIiAgICAgICAgICAgICAgICBcIm1pbnRfbGVhdmVzXCIgICAgICAgICAgICAgICAgXCJwZWFudXRfbV9tc1wiICAgICAgICAgICAgICAgIFwicmVndWxhcl9tX21zXCIgICAgICAgICAgICAgIFxuWzYxXSBcIm1pbnRfbV9tc1wiICAgICAgICAgICAgICAgICAgXCJyaWJib25fY2FuZHlcIiAgICAgICAgICAgICAgIFwicm9sb3NcIiAgICAgICAgICAgICAgICAgICAgICBcInNraXR0bGVzXCIgICAgICAgICAgICAgICAgICBcbls2NV0gXCJzbWFydGllc19hbWVyaWNhblwiICAgICAgICAgIFwic21hcnRpZXNfY29tbW9ud2VhbHRoXCIgICAgICBcImNoaWNrX29fc3RpY2tzXCIgICAgICAgICAgICAgXCJzdGFyYnVyc3RcIiAgICAgICAgICAgICAgICAgXG5bNjldIFwic3dlZGlzaF9maXNoXCIgICAgICAgICAgICAgICBcIm9kZF9tYXJzaG1hbGxvd19wZWFudXRcIiAgICAgXCJ0aHJlZV9tdXNrZXRlZXJzXCIgICAgICAgICAgIFwicGVhbnV0X2J1dHRlcl9iYXJzXCIgICAgICAgIFxuWzczXSBcInBlYW51dF9idXR0ZXJfamFyc1wiICAgICAgICAgXCJ0cmFpbF9taXhcIiAgICAgICAgICAgICAgICAgIFwidHdpeFwiICAgICAgICAgICAgICAgICAgICAgICBcInlvcmtfcGVwcGVybWludF9wYXR0aWVzXCIgICBcbls3N10gXCJuZWNjb193YWZlcnNcIiAgICAgICAgICAgICAgIFwiY29mZmVlX2NyaXNwXCIgICAgICAgICAgICAgICBcImRvdmVfYmFyc1wiICAgICAgICAgICAgICAgICAgXCJoZXJzaGV5c19kYXJrX2Nob2NvbGF0ZVwiICAgXG5bODFdIFwibGljb3JpY2VfeWVzX2JsYWNrXCIgICAgICAgICBcIm1pa2VfYW5kX2lrZVwiICAgICAgICAgICAgICAgXCJibHVlX21fbXNcIiAgICAgICAgICAgICAgICAgIFwicmVkX21fbXNcIiAgICAgICAgICAgICAgICAgIFxuWzg1XSBcInRoaXJkX3BhcnR5X21fbXNcIiAgICAgICAgICAgXCJtcl9nb29kYmFyXCIgICAgICAgICAgICAgICAgIFwicGVlcHNcIiAgICAgICAgICAgICAgICAgICAgICBcInJlZXNlc19waWVjZXNcIiAgICAgICAgICAgICBcbls4OV0gXCJzb3VycGF0Y2hfa2lkc1wiICAgICAgICAgICAgIFwic3dlZXRfdGFydHNcIiAgICAgICAgICAgICAgICBcInRpY190YWNzXCIgICAgICAgICAgICAgICAgICAgXCJvZGRfbWFyc2htYWxsb3dfcGVhbnV0c1wiICAgXG5bOTNdIFwid2hhdGNoYW1hY2FsbGl0X2JhcnNcIiAgICAgICBcIjEwMF9ncmFuZF9iYXJcIiAgICAgICAgICAgICAgXCJncmVlbl9wYXJ0eV9tX21zXCIgICAgICAgICAgIFwiYm9vX2JlcnJ5X2NydW5jaFwiICAgICAgICAgIFxuWzk3XSBcInRha2VfNVwiICAgICAgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code> [1] &quot;butterfinger&quot;               &quot;x100_grand_bar&quot;             &quot;mary_janes2&quot;                &quot;any_full_sized_candy_bar&quot;  
+ [5] &quot;black_jacks&quot;                &quot;bonkers_the_candy&quot;          &quot;bottle_caps&quot;                &quot;box_o_raisins&quot;             
+ [9] &quot;brach_product&quot;              &quot;bubble_gum&quot;                 &quot;cadbury_creme_eggs&quot;         &quot;candy_corn&quot;                
+[13] &quot;free_restaurant_candy&quot;      &quot;chiclets&quot;                   &quot;caramellos&quot;                 &quot;snickers&quot;                  
+[17] &quot;dark_chocolate_hershey&quot;     &quot;dots&quot;                       &quot;fuzzy_peaches&quot;              &quot;glow_sticks&quot;               
+[21] &quot;broken_glow_stick&quot;          &quot;goo_goo_clusters&quot;           &quot;good_n_plenty&quot;              &quot;gum_from_baseball_cards&quot;   
+[25] &quot;gummy_bears_straight_up&quot;    &quot;healthy_fruit&quot;              &quot;heath_bar&quot;                  &quot;hersheys_kisses&quot;           
+[29] &quot;hersheys_milk_chocolate&quot;    &quot;jolly_ranchers_bad_flavor&quot;  &quot;jolly_ranchers_good_flavor&quot; &quot;kinder_happy_hippo&quot;        
+[33] &quot;kit_kat&quot;                    &quot;hard_candy&quot;                 &quot;lemon_heads&quot;                &quot;licorice&quot;                  
+[37] &quot;licorice_not_black&quot;         &quot;lindt_truffle&quot;              &quot;lollipops&quot;                  &quot;mars&quot;                      
+[41] &quot;mary_janes&quot;                 &quot;maynards&quot;                   &quot;milk_duds&quot;                  &quot;laffy_taffy&quot;               
+[45] &quot;minibags_of_chips&quot;          &quot;reggie_jackson_bar&quot;         &quot;pixy_stix&quot;                  &quot;nerds&quot;                     
+[49] &quot;nestle_crunch&quot;              &quot;nown_laters&quot;                &quot;pencils&quot;                    &quot;milky_way&quot;                 
+[53] &quot;reeses_peanut_butter_cups&quot;  &quot;toblerone&quot;                  &quot;runts&quot;                      &quot;junior_mints&quot;              
+[57] &quot;mint_kisses&quot;                &quot;mint_leaves&quot;                &quot;peanut_m_ms&quot;                &quot;regular_m_ms&quot;              
+[61] &quot;mint_m_ms&quot;                  &quot;ribbon_candy&quot;               &quot;rolos&quot;                      &quot;skittles&quot;                  
+[65] &quot;smarties_american&quot;          &quot;smarties_commonwealth&quot;      &quot;chick_o_sticks&quot;             &quot;starburst&quot;                 
+[69] &quot;swedish_fish&quot;               &quot;odd_marshmallow_peanut&quot;     &quot;three_musketeers&quot;           &quot;peanut_butter_bars&quot;        
+[73] &quot;peanut_butter_jars&quot;         &quot;trail_mix&quot;                  &quot;twix&quot;                       &quot;york_peppermint_patties&quot;   
+[77] &quot;necco_wafers&quot;               &quot;coffee_crisp&quot;               &quot;dove_bars&quot;                  &quot;hersheys_dark_chocolate&quot;   
+[81] &quot;licorice_yes_black&quot;         &quot;mike_and_ike&quot;               &quot;blue_m_ms&quot;                  &quot;red_m_ms&quot;                  
+[85] &quot;third_party_m_ms&quot;           &quot;mr_goodbar&quot;                 &quot;peeps&quot;                      &quot;reeses_pieces&quot;             
+[89] &quot;sourpatch_kids&quot;             &quot;sweet_tarts&quot;                &quot;tic_tacs&quot;                   &quot;odd_marshmallow_peanuts&quot;   
+[93] &quot;whatchamacallit_bars&quot;       &quot;100_grand_bar&quot;              &quot;green_party_m_ms&quot;           &quot;boo_berry_crunch&quot;          
+[97] &quot;take_5&quot;                    </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKCFpcy5uYShjYW5kaWVzX29ubHkpKVxuYGBgIn0= -->
+<pre class="r"><code>sum(!is.na(candies_only))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDYyOTUyM1xuIn0= -->
+<pre><code>[1] 629523</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 2 What was the average age of people who are going out trick
+or treating?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ29pbmdfb3V0IDwtIHN1YnNldChmdWxsX2NhbmR5LCBnb2luZ19vdXQgPT0gXCJZZXNcIiAmIGFnZSA+PSAxICYgYWdlIDw9IDEwMClcblxubWVhbihnb2luZ19vdXQkYWdlLCBuYS5ybSA9IFRSVUUpXG5cbmBgYCJ9 -->
+<pre class="r"><code>going_out &lt;- subset(full_candy, going_out == &quot;Yes&quot; &amp; age &gt;= 1 &amp; age &lt;= 100)
+
+mean(going_out$age, na.rm = TRUE)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM1LjAxOTUyXG4ifQ== -->
+<pre><code>[1] 35.01952</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 3 What was the average age of people who are not going trick
+or treating?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ29pbmdfb3V0IDwtIHN1YnNldChmdWxsX2NhbmR5LCBnb2luZ19vdXQgPT0gXCJOb1wiICYgYWdlID49IDEgJiBhZ2UgPD0gMTAwKVxuXG5tZWFuKGdvaW5nX291dCRhZ2UsIG5hLnJtID0gVFJVRSlcblxuYGBgIn0= -->
+<pre class="r"><code>going_out &lt;- subset(full_candy, going_out == &quot;No&quot; &amp; age &gt;= 1 &amp; age &lt;= 100)
+
+mean(going_out$age, na.rm = TRUE)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM5LjE0NTQ5XG4ifQ== -->
+<pre><code>[1] 39.14549</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 4 For each of joy, despair and meh, which candy bar received
+the most of these ratings?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6OTcsIm5jb2wiOjMsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiOTcgw5cgMyJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUErMVhUWXNjUlJqdTJkM0o3bnpzWnJNeGlSSDE0RVZVZG9sUlFSREZRQlRqUVNRbW1GdFIzVjA5WGVucXFxYXFPck1kRHlvSUtuandKbmdSRkZIeEc3eUo0RWxQSHJ6NUFVSkFQSWwzRWJNKzNkdFYwelBKRC9Dd0E4L00xRnZWNytmelZsV2ZQM3ZwZ2VHbFlSQUV5OEhLMGxLdzNNZmZvSC94d3BQYkR3ZVFZTkFMVm9KQi9idUxSVWVibFVHd0NkQjI0a2lvVmNZa21RZzFKY2J5S0dzblRrektuQ1JhNVNTa2hvVlVDQkpSSFp0MitsaWlHU09hR1V0TFRhWEZwSXlyZG5LVVUxMlJ5MVF5YzdvVnJZZHFseWlpS1RkY09pVW5MeXNoS2dobGxESnRZQ2ttaWFCWGxHNFhyQlpNUmx5NDlhTlEwQ2lENGloem92V1VVV0hUQ3E2VzNMYkNnWVVkUVhLKzJ3cldvcFJIZ2xuLzFFU3BtRWhTQ0NhdDgzb3NXUlFwTXFVSmZIRVA1clNTbmJDUGhFcG10YXMyWlhNaGI5UVdNa1RZNU5EYlNjcXJWeXRTTUlvQW5YQkxzOG1Fcy8wd2xFVFVMdHhoQ2xOemFsZGk1WjBlTmhNa1VscTJrazJFUVdwRW9qUjI1dlZXeG1YTU5FbHBVVlFrNVVXaDJwbmpLbzRKcW1QU0hCVkZ5ZUdhTEsydkcwY2xCYU5YdkxNanFhYVNDTnJSUHB4VjE5ZEZXU3ZxaEJST05OWThSSzdtZ2xrUE5mSkFDcTNpTW5JMmgyRVpobmdXZEhNNUZ4d3g4b2pOZVpWeFk3ekJJeER4a0U0TVVRbEI1cjNaWXdiT1djNE0wcFRuU2s0YmRqaEZnaVpKUld6OTdUTGxiQkdwTEdubzVUZ2t3RTFlS0s5NlVQRGRxaTZ2STlYV2Z1NUlXRnBrQndueEdSck51c21MQklNN0JHejFYS283TEs5SXlQQWdGb095azlTU3NuQVpORk1XYzVPU0JGOHViaDhlelJuY3BvNEpXeEdOd3hKbGlUVExHUUhCbkpYYkZucXNZZjVjay9WMUtUM0pCazJ5YzVLYm0wY1p6cUxFVXBHUnVQUUJIYTROcEt3eTg4WHFTelpyb1BIbFVuS2xTVzNHSzBKV2JOcnBneE0zWjJtbkVUVGl4NHhQcGJmYytCU2xLbEkxWjUwQjdGSWE2VEdPZEdzbTR6VmovZk9WMGhtc0ZBWFRUUUlLYXVzMHV5N01aMUgzQzhZOEp6WnRXbStEZVdreVp0bXNSVFoyN3o5MWlreVE5TGdUMXZHWTZvNXpwSFg2QmlwV3FHK1hpbjJ0WnFHTzl3dVJjRGxoVHZHNlFMOWJZbldaSk1JSGJSWDZTaXZKdXZXcXNMODVpMnNnS0xvaDhoeHRTOTJwL2pxYXZPbHNjQ1J5TE53TXNlV0VURGQwNjhqSDJOaEtRWFZYd1RqbkdTTjFIdkRyWkpGS0VsWXI1Y2F4ZmNPb1VpUHIyQjh5N3RteVppUjZhSmJYRlR2MTdYY1NtUWZKeUR3L285SVhaNFFHWXNnS09zYUpWbEYya2xGSGcxdW1hVzJSNWpRQ3p6RFZZVGRLeTdFWkYzaTY2Z1owSzVVNGJFb2NoNFpmWmUxdTNkM0RjOTMwMkV4eXlGS2s0Q0dYVWVjMlp4RzdrYi96RkhGcDBERFU4V0VRaXBMTkNXSjFoYzE1UDRFWmVhUDM2L084bkw4THJKNTk0cmxuejV3N2Z6QThHQjRNRDRZSHcvL3BFUHQ0czIwSGQxNExndHMvQlo3SFJlOXBuSWxmNG9CNkg4RDQyQi9BeDBGdzlHZmdkZUF4NEE3Y00vNEJYZ1ZlQnU3Qm5mSnQ0QTNnS2VCZW5BZy9kTENDVzkxclFBWmNBRTdocFA0TCtCNzRBdmdFc01CRjREN2dFRno3RnZnYWdCL2pEM0FNdzhjUjFvL2VBOTRFdG5GSTNnMUE5K0J2NEVmZ0srQkJISFRmQWQ4QUh3S1BBQnVJK2hjQTh0WFBBY1M2ZWhlQVkrdlFLOEFsNEJ4dVNEOEJud0V2QU04QWp3S0hjVitBL3BYZmdJK0FGd0dKTjJDc1czNFhxRitKeit5L0VTOUI3MUlLSUk0bHZDYjMvZ1hlQXFDdmh6ejNJTzg5am9WL0FyOER2d0xJYVhCeDRUMjdMM0V4TmUyNXV1eUUzWmVnTmR4OGNGM3o5L09lWEZBeDBHcTY0OVRVZFY1NkNWOTdlM3Z2TE5xS0JEWE9saE1PWTJycFRsTGZqekc2dnZESXFpb3NWM2ovYnFJTStnc1A5L1NDNEhBcGEwL2k3U2d0WmJaOXVqYlFUTzkvMXR2L3RQTi9lZC9rMGw2cnF1OXVRVXhPdUwrTDlnVU5tWEIzUDBUY0JMeFRhRnkrWFNTUW1oMnJMSFhyaHJnVU9Va1RXM0Q5UDhvWks0a0RFUUFBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["candy"],"name":[1],"type":["chr"],"align":["left"]},{"label":["feelings"],"name":[2],"type":["chr"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"broken_glow_stick","2":"DESPAIR","3":"7905"},{"1":"gum_from_baseball_cards","2":"DESPAIR","3":"7341"},{"1":"free_restaurant_candy","2":"DESPAIR","3":"7255"},{"1":"mary_janes2","2":"DESPAIR","3":"6730"},{"1":"box_o_raisins","2":"DESPAIR","3":"6577"},{"1":"jolly_ranchers_bad_flavor","2":"DESPAIR","3":"6309"},{"1":"pencils","2":"DESPAIR","3":"6231"},{"1":"black_jacks","2":"DESPAIR","3":"5606"},{"1":"healthy_fruit","2":"DESPAIR","3":"5547"},{"1":"trail_mix","2":"DESPAIR","3":"5081"},{"1":"chiclets","2":"DESPAIR","3":"5001"},{"1":"good_n_plenty","2":"DESPAIR","3":"4926"},{"1":"necco_wafers","2":"DESPAIR","3":"4893"},{"1":"maynards","2":"DESPAIR","3":"4859"},{"1":"bonkers_the_candy","2":"DESPAIR","3":"4743"},{"1":"chick_o_sticks","2":"DESPAIR","3":"4737"},{"1":"fuzzy_peaches","2":"DESPAIR","3":"4649"},{"1":"reggie_jackson_bar","2":"DESPAIR","3":"4506"},{"1":"hard_candy","2":"DESPAIR","3":"4492"},{"1":"dots","2":"DESPAIR","3":"4424"},{"1":"candy_corn","2":"DESPAIR","3":"4394"},{"1":"goo_goo_clusters","2":"DESPAIR","3":"4301"},{"1":"kinder_happy_hippo","2":"DESPAIR","3":"4301"},{"1":"odd_marshmallow_peanut","2":"DESPAIR","3":"4301"},{"1":"mint_leaves","2":"DESPAIR","3":"4100"},{"1":"nown_laters","2":"DESPAIR","3":"3976"},{"1":"mary_janes","2":"DESPAIR","3":"3947"},{"1":"bottle_caps","2":"DESPAIR","3":"3924"},{"1":"ribbon_candy","2":"DESPAIR","3":"3888"},{"1":"brach_product","2":"DESPAIR","3":"3822"},{"1":"bubble_gum","2":"DESPAIR","3":"3783"},{"1":"licorice","2":"DESPAIR","3":"3760"},{"1":"mint_kisses","2":"DESPAIR","3":"3756"},{"1":"minibags_of_chips","2":"DESPAIR","3":"3700"},{"1":"smarties_commonwealth","2":"DESPAIR","3":"3669"},{"1":"laffy_taffy","2":"DESPAIR","3":"3627"},{"1":"licorice_not_black","2":"DESPAIR","3":"3590"},{"1":"lollipops","2":"DESPAIR","3":"3520"},{"1":"pixy_stix","2":"DESPAIR","3":"3515"},{"1":"peanut_butter_jars","2":"DESPAIR","3":"3493"},{"1":"glow_sticks","2":"DESPAIR","3":"3239"},{"1":"lemon_heads","2":"DESPAIR","3":"3041"},{"1":"gummy_bears_straight_up","2":"DESPAIR","3":"3015"},{"1":"swedish_fish","2":"DESPAIR","3":"2979"},{"1":"smarties_american","2":"DESPAIR","3":"2960"},{"1":"cadbury_creme_eggs","2":"DESPAIR","3":"2861"},{"1":"jolly_ranchers_good_flavor","2":"DESPAIR","3":"2599"},{"1":"runts","2":"DESPAIR","3":"2564"},{"1":"mint_m_ms","2":"DESPAIR","3":"2553"},{"1":"peanut_butter_bars","2":"DESPAIR","3":"2513"},{"1":"milk_duds","2":"DESPAIR","3":"2484"},{"1":"hersheys_kisses","2":"DESPAIR","3":"2356"},{"1":"nerds","2":"DESPAIR","3":"2246"},{"1":"junior_mints","2":"DESPAIR","3":"2237"},{"1":"heath_bar","2":"DESPAIR","3":"2216"},{"1":"odd_marshmallow_peanuts","2":"DESPAIR","3":"2107"},{"1":"caramellos","2":"DESPAIR","3":"2062"},{"1":"hersheys_milk_chocolate","2":"DESPAIR","3":"2010"},{"1":"starburst","2":"DESPAIR","3":"1990"},{"1":"skittles","2":"DESPAIR","3":"1967"},{"1":"york_peppermint_patties","2":"DESPAIR","3":"1965"},{"1":"mars","2":"DESPAIR","3":"1826"},{"1":"peeps","2":"DESPAIR","3":"1808"},{"1":"three_musketeers","2":"DESPAIR","3":"1668"},{"1":"x100_grand_bar","2":"DESPAIR","3":"1624"},{"1":"dark_chocolate_hershey","2":"DESPAIR","3":"1609"},{"1":"licorice_yes_black","2":"DESPAIR","3":"1496"},{"1":"rolos","2":"DESPAIR","3":"1454"},{"1":"butterfinger","2":"DESPAIR","3":"1403"},{"1":"lindt_truffle","2":"DESPAIR","3":"1358"},{"1":"toblerone","2":"DESPAIR","3":"1341"},{"1":"milky_way","2":"DESPAIR","3":"1295"},{"1":"tic_tacs","2":"DESPAIR","3":"1273"},{"1":"peanut_m_ms","2":"DESPAIR","3":"1246"},{"1":"nestle_crunch","2":"DESPAIR","3":"1193"},{"1":"boo_berry_crunch","2":"DESPAIR","3":"1151"},{"1":"regular_m_ms","2":"DESPAIR","3":"1134"},{"1":"mike_and_ike","2":"DESPAIR","3":"942"},{"1":"coffee_crisp","2":"DESPAIR","3":"930"},{"1":"sourpatch_kids","2":"DESPAIR","3":"888"},{"1":"snickers","2":"DESPAIR","3":"833"},{"1":"twix","2":"DESPAIR","3":"768"},{"1":"reeses_peanut_butter_cups","2":"DESPAIR","3":"685"},{"1":"sweet_tarts","2":"DESPAIR","3":"616"},{"1":"kit_kat","2":"DESPAIR","3":"597"},{"1":"whatchamacallit_bars","2":"DESPAIR","3":"531"},{"1":"third_party_m_ms","2":"DESPAIR","3":"509"},{"1":"any_full_sized_candy_bar","2":"DESPAIR","3":"407"},{"1":"mr_goodbar","2":"DESPAIR","3":"379"},{"1":"take_5","2":"DESPAIR","3":"353"},{"1":"reeses_pieces","2":"DESPAIR","3":"341"},{"1":"hersheys_dark_chocolate","2":"DESPAIR","3":"320"},{"1":"red_m_ms","2":"DESPAIR","3":"236"},{"1":"blue_m_ms","2":"DESPAIR","3":"228"},{"1":"dove_bars","2":"DESPAIR","3":"219"},{"1":"green_party_m_ms","2":"DESPAIR","3":"137"},{"1":"100_grand_bar","2":"DESPAIR","3":"85"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[97]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 5 How many people rated Starburst as despair?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIxIMOXIDMiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFRVFVzRE1SQ2RaaHZYWGZBRC9CMjdGeEc4RnRxQ042a0t2YWE3YVYxTUp5WEpvdDc4ZGY2czFrbWFnQ1NRWk9abDNwdDVXYzNYOS9XNkJvQUNwb3hCd1NrRS92YTZiQjZCRUVvbU1JWEszMTlVZEJjcUFXNy9QVlRXQ2JNWmpYWFpRemxmdkR6UG5sWVVYZ1VZeXQ5TWxLUFlTeHQ1UlFJN2dmMTNUQzYzVXFvQmR6YU5nWmxFWmZSbm0yUjhIL1pEeDRsVzNxdFR3dHBzeHJvWFRyUmJRM3pLamhtbDFBYzNhQ1FTODg1NVJwNllETGdaMFUvU045MzdpQi9OZzI5d2RoNVcvSVd3VTF5Y1c3SlRsT0pSNmtMaWJrQ1pabGRpSTFWTXJzbHhNTndleklBdU9TSFV0azQ3a2VycVRxdUVCRzl3L0FQdUZJZzY4QUVBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["candy"],"name":[1],"type":["chr"],"align":["left"]},{"label":["feelings"],"name":[2],"type":["chr"],"align":["left"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"starburst","2":"DESPAIR","3":"1990"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>For the next three questions, count despair as -1, joy as +1, and meh
+as 0.</p>
+<p>Question 6 What was the most popular candy bar by this rating system
+for each gender in the dataset ?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2FuZGllc19vbmx5X2xvbmdfcTYgIDwtIHBpdm90X2xvbmdlcihjYW5kaWVzX29ubHksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbHMgPSBjKDE6OTcpLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuYW1lc190byA9IFwiY2FuZHlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSBcImdlbmRlclwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSBcImZlZWxpbmdzXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVxuXG5gYGAifQ== -->
+<pre class="r"><code>candies_only_long_q6  &lt;- pivot_longer(candies_only,
+                                   cols = c(1:97),
+                                   names_to = &quot;candy&quot;,
+                                   names_to = &quot;gender&quot;,
+                                   values_to = &quot;feelings&quot;
+                                   )
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcGl2b3RfbG9uZ2VyKGNhbmRpZXNfb25seSwgY29scyA9IGMoMTo5NyksIG5hbWVzX3RvID0gXCJjYW5keVwiLCAgOiBcbiAgZm9ybWFsIGFyZ3VtZW50IFwibmFtZXNfdG9cIiBtYXRjaGVkIGJ5IG11bHRpcGxlIGFjdHVhbCBhcmd1bWVudHNcbiJ9 -->
+<pre><code>Error in pivot_longer(candies_only, cols = c(1:97), names_to = &quot;candy&quot;,  : 
+  formal argument &quot;names_to&quot; matched by multiple actual arguments</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAidGFzazRfYW5hbHlzaXMiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmxpYnJhcnkodGlkeXIpCmxpYnJhcnkocmVhZHhsKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShoZXJlKQpsaWJyYXJ5KHN0cmluZ3IpCmBgYAoKCgoKYGBge3J9CmZ1bGxfY2FuZHkgPC0gcmVhZF9jc3YoaGVyZTo6aGVyZSgiY2xlYW5fZGF0YS9mdWxsX2NhbmR5LmNzdiIpLCBzaG93X2NvbF90eXBlcyA9IEZBTFNFKQpgYGAKCgoKUXVlc3Rpb24gMQpXaGF0IGlzIHRoZSB0b3RhbCBudW1iZXIgb2YgY2FuZHkgcmF0aW5ncyBnaXZlbiBhY3Jvc3MgdGhlIHRocmVlIHllYXJzLiAoTnVtYmVyIG9mIGNhbmR5IHJhdGluZ3MsIG5vdCB0aGUgbnVtYmVyIG9mIHJhdGVycy4gRG9u4oCZdCBjb3VudCBtaXNzaW5nIHZhbHVlcykKCmBgYHtyfQpmdWxsX2NhbmR5ICU+JSAKICBuYW1lcygpCgpjYW5kaWVzX29ubHkgPC0gc2VsZWN0KGZ1bGxfY2FuZHksIC15ZWFyLCAtYWdlLCAtZ29pbmdfb3V0LAogICAgICAgICAgICAgICAgICAgICAgIC1jb3VudHJ5LCAtZ2VuZGVyKQpuYW1lcyhjYW5kaWVzX29ubHkpCgpzdW0oIWlzLm5hKGNhbmRpZXNfb25seSkpCgoKIyBbMV0gNjI5NTIzCgpgYGAKCgoKClF1ZXN0aW9uIDIKV2hhdCB3YXMgdGhlIGF2ZXJhZ2UgYWdlIG9mIHBlb3BsZSB3aG8gYXJlIGdvaW5nIG91dCB0cmljayBvciB0cmVhdGluZz8KCmBgYHtyfQpnb2luZ19vdXQgPC0gc3Vic2V0KGZ1bGxfY2FuZHksIGdvaW5nX291dCA9PSAiWWVzIiAmIGFnZSA+PSAxICYgYWdlIDw9IDEwMCkKCm1lYW4oZ29pbmdfb3V0JGFnZSwgbmEucm0gPSBUUlVFKQoKIyBbMV0gMzUuMDE5NTIKYGBgCgoKUXVlc3Rpb24gMwpXaGF0IHdhcyB0aGUgYXZlcmFnZSBhZ2Ugb2YgcGVvcGxlIHdobyBhcmUgbm90IGdvaW5nIHRyaWNrIG9yIHRyZWF0aW5nPwoKYGBge3J9CmdvaW5nX291dCA8LSBzdWJzZXQoZnVsbF9jYW5keSwgZ29pbmdfb3V0ID09ICJObyIgJiBhZ2UgPj0gMSAmIGFnZSA8PSAxMDApCgptZWFuKGdvaW5nX291dCRhZ2UsIG5hLnJtID0gVFJVRSkKCgojIFsxXSAzOS4xNDU0OQpgYGAKCgoKClF1ZXN0aW9uIDQKRm9yIGVhY2ggb2Ygam95LCBkZXNwYWlyIGFuZCBtZWgsIHdoaWNoIGNhbmR5IGJhciByZWNlaXZlZCB0aGUgbW9zdCBvZiB0aGVzZSByYXRpbmdzPwoKYGBge3J9CiAjIHBpdm90aW5nIHRhYmxlIHRvIGxvbmdlcgoKY2FuZGllc19vbmx5X2xvbmcgIDwtIHBpdm90X2xvbmdlcihjYW5kaWVzX29ubHksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29scyA9IGMoMTo5NyksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY2FuZHkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJmZWVsaW5ncyIpCgogIyBncm91cGluZyBieSBjYW5keQoKY2FuZGllc19ncm91cGVkIDwtIGNhbmRpZXNfb25seV9sb25nICU+JSAKICBncm91cF9ieShjYW5keSkgIApjYW5kaWVzX2dyb3VwZWQgPC0gY2FuZGllc19vbmx5X2xvbmcgJT4lIAogIGNvdW50KGNhbmR5LCBmZWVsaW5ncykgCgoKICMgc2VsZWN0aW5nIGZvciBqb3kKCmNhbmRpZXNfZ3JvdXBlZCAlPiUgCiAgc2VsZWN0KGNhbmR5LCBmZWVsaW5ncywgbikgJT4lIAogIHNsaWNlX21heChmZWVsaW5ncyA9PSAiSk9ZIikgJT4lIAogIGFycmFuZ2UoZGVzYyhuKSkKCiAjIGFueV9mdWxsX3NpemVkX2NhbmR5X2JhcglKT1kJNzU4OQkKCgoKICMgc2VsZWN0aW5nIGZvciBtZWgKCmNhbmRpZXNfZ3JvdXBlZCAlPiUgCiAgc2VsZWN0KGNhbmR5LCBmZWVsaW5ncywgbikgJT4lIAogIHNsaWNlX21heChmZWVsaW5ncyA9PSAiTUVIIikgJT4lIAogIGFycmFuZ2UoZGVzYyhuKSkKCiMgbG9sbGlwb3BzCU1FSAkxNTcwCQoKCgojIHNlbGVjdGluZyBmb3IgZGVzcGFpcgoKY2FuZGllc19ncm91cGVkICU+JSAKICBzZWxlY3QoY2FuZHksIGZlZWxpbmdzLCBuKSAlPiUgCiAgc2xpY2VfbWF4KGZlZWxpbmdzID09ICJERVNQQUlSIikgJT4lIAogIGFycmFuZ2UoZGVzYyhuKSkKCiMgYnJva2VuX2dsb3dfc3RpY2sJREVTUEFJUgk3OTA1CQoKCmBgYAoKCgpRdWVzdGlvbiA1CkhvdyBtYW55IHBlb3BsZSByYXRlZCBTdGFyYnVyc3QgYXMgZGVzcGFpcj8KYGBge3J9CmNhbmRpZXNfZ3JvdXBlZCAlPiUgCiAgc2VsZWN0KGNhbmR5LCBmZWVsaW5ncywgbikgJT4lIAogIGZpbHRlcihjYW5keSA9PSAic3RhcmJ1cnN0IiwgZmVlbGluZ3MgPT0gIkRFU1BBSVIiKQoKCmBgYAoKCgpGb3IgdGhlIG5leHQgdGhyZWUgcXVlc3Rpb25zLCBjb3VudCBkZXNwYWlyIGFzIC0xLCBqb3kgYXMgKzEsIGFuZCBtZWggYXMgMC4KClF1ZXN0aW9uIDYKV2hhdCB3YXMgdGhlIG1vc3QgcG9wdWxhciBjYW5keSBiYXIgYnkgdGhpcyByYXRpbmcgc3lzdGVtIGZvciBlYWNoIGdlbmRlciBpbiB0aGUgZGF0YXNldCA/CgpgYGB7cn0KY2FuZGllc19vbmx5X3E2IDwtIHNlbGVjdChmdWxsX2NhbmR5LCAteWVhciwgLWFnZSwgLWdvaW5nX291dCwKICAgICAgICAgICAgICAgICAgICAgICAtY291bnRyeSkKCmNhbmRpZXNfb25seV9sb25nX3E2ICA8LSBwaXZvdF9sb25nZXIoY2FuZGllc19vbmx5LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbHMgPSBjKDE6OTcpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNhbmR5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAiZmVlbGluZ3MiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKQpgYGAKCgo=</div>
 
 
 
