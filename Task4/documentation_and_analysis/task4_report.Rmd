@@ -16,20 +16,47 @@ Introduction
 The data we were presented with comprised 3 separate excel files containing information gathered over 3 years regarding the habits and sweet preferences of individuals on Halloween.  They contained personal information (eg. age, gender), social habits (going out on Halloween) as well as a substantial list of sweets which were rated according to "JOY", "DESPAIR" and "MEH".
 
 Cleaning
-The inital cleaning process involved passing all the datasets through Janitor clean_names to remove capitals and other puctuation from the column heads.
+The inital cleaning process involved passing all the datasets through Janitor clean_names to remove capitals and other punctuation from the column heads.
 
 
-```{r}
-first_clean_2015 <- clean_names(boing_boing_candy_2015)
-```
+<!-- first_clean_2015 <- clean_names(boing_boing_candy_2015) -->
 
 
-We had several discussions about our remit as data analysts before we started cleaning the data.  Included in the data sets were information outwith the topic of 'candy' including drinks (eg. kale smoothie and mint julep), drugs (vicadin) and bread products (white bread).  We decided to remove any item which was not a sweet or something that could conceivably be given to Trick or Treaters.  This meant keeping food related items including healthy_fruit and box_o_raisins since some parents like to give Trick or Treaters and option to be more healthy.  The rest of the food columns and columns which seemed irrlevant to the dataset (Real Housewives of Orange County Season 9 Blue-Ray) were removed.
+We had several discussions about our remit as data analysts before we started cleaning the data.  Included in the data sets were information outwith the topic of 'candy' including drinks (eg. kale smoothie and mint julep), drugs (vicadin) and bread products (white bread).  We decided to remove any item which was not a sweet or something that could conceivably be given to Trick or Treaters.  This meant keeping food related items including healthy_fruit and box_o_raisins since some parents like to give Trick or Treaters and option to be more healthy.  The rest of the food columns and columns which seemed irrelevant to the dataset (Real Housewives of Orange County Season 9 Blue-Ray) were removed.
 
-```{r}
-second_clean_2017 <- first_clean_2017[ -c(1,12,21,22,26,27,31,43,46,48,49,68,69,72,81,92,96,104,105,107,108,112:120) ]
-```
 
-Two of the datasets had a timestamp which contained a year - the year data was extracted into a new column.
+<!-- second_clean_2017 <- first_clean_2017[ -c(1,12,21,22,26,27,31,43,46,48,49,68,69,72,81,92,96,104,105,107,108,112:120) ] -->
+
+
+Two of the datasets had a timestamp which contained a year - the year data was extracted into a new column called year and in the 2107 data, the "q" prefix to the column headings was removed.
+
+<!-- colnames(second_clean_2017) <- gsub("^.{3}", "", colnames(second_clean_2017)) -->
+
+
+We used an excel sheet to visualise all the different naming conventions across the 3 datasets and set about standardising them to enable the 3 datasets to be joined successfully.
+
+
+<!-- third_clean_2017 <- second_clean_2017 %>%  -->
+<!--   rename( -->
+<!--     mary_janes2 = anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes, -->
+<!--     box_o_raisins = boxo_raisins, -->
+<!--     free_restaurant_candy = candy_that_is_clearly_just_the_stuff_given_out_for_free_at_restaurants, -->
+<!--     chick_o_sticks = chick_o_sticks_we_don_t_know_what_that_is, -->
+<!--     hersheys_milk_chocolate = hershey_s_milk_chocolate, -->
+<!--     jolly_ranchers_bad_flavor = jolly_rancher_bad_flavor, -->
+<!--     peanut_m_ms = peanut_m_m_s, -->
+<!--     reeses_peanut_butter_cups = reese_s_peanut_butter_cups, -->
+<!--     boo_berry_crunch = sandwich_sized_bags_filled_with_boo_berry_crunch, -->
+<!--     sourpatch_kids = sourpatch_kids_i_e_abominations_of_nature, -->
+<!--     odd_marshmallow_peanuts = those_odd_marshmallow_circus_peanut_things, -->
+<!--     toblerone = tolberone_something_or_other -->
+<!--   ) -->
+
+We noticed that the age column was as a chr so we changed that to an integer then started the mammtoth task of cleaning the county data.  Our approach was as follows:
+1. Searched for country names within each dataset
+2. There were so many variations of capital and lower case letters - we ran the str_to_lower function to make our lives a bit easier!
+3. Random responses were changed to NAs
+
+
 
 

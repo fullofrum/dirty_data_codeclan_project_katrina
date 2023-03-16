@@ -167,7 +167,7 @@ starwars
 
 library(data.table)
 df <- data.table(starwars)
-v <- c("male","female")
+v <- c("cat","female")
 setnames(df, v, paste0("x",v), skip_absent=TRUE)
 
 g <- melt(df, id.vars = "name",
@@ -182,6 +182,23 @@ g[names==2, names := "female" ]
 
 
 
+library(data.table)
+df <- data.table(starwars)
+v <- c("sex","eye_color","homeworld")
+setnames(df, v, paste0("x",v), skip_absent=TRUE)
+
+g <- melt(df, id.vars = "hair_color",
+          measure.vars = patterns(mishmash = "x" ,
+                                  sex = "sex",
+                                  eye_color = "eye_color"),
+          variable.name = "names")
+
+
+g[names==1, names := "sex" ]
+g[names==2, names := "eye_colour" ]
+g[names==3, names := "homeworld" ]
+
+
 dat <- tribble(
   ~group,  ~BP,  ~HS,  ~BB, ~lowerBP, ~upperBP, ~lowerHS, ~upperHS, ~lowerBB, ~upperBB,
   "1", 0.51, 0.15, 0.05,     0.16,     0.18,      0.5,     0.52,     0.14,     0.16,
@@ -190,6 +207,11 @@ dat <- tribble(
   "2.3", 0.09, 0.17, 0.09,     0.13,     0.16,     0.08,     0.11,     0.15,     0.18,
   "2.4", 0.68, 0.12, 0.07,     0.12,     0.14,     0.66,     0.69,     0.11,     0.13,
   "3", 0.53, 0.15, 0.06
+  
+  
+  
+  
+  
 group names values lower upper
 1:     1    BP   0.51  0.16  0.18
 2:   2.1    BP   0.67  0.09  0.11
@@ -200,3 +222,22 @@ group names values lower upper
 7:     1    HS   0.15  0.50  0.52
 8:   2.1    HS   0.09  0.66  0.68
 9:   2.2    HS   0.13  0.34  0.38
+
+
+
+
+test <- starwars %>% 
+pivot_longer(cols = 4:6,
+             names_to = "data",
+             values_to = "values")
+             
+               
+               
+               
+
+test <- starwars %>%
+  pivot_longer(
+    cols = hair_color:eye_color,
+    names_to = c(".value", "set"),
+    names_pattern = "(.)(.)"
+  )

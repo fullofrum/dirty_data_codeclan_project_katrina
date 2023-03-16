@@ -142,14 +142,188 @@ Question 6
 What was the most popular candy bar by this rating system for each gender in the dataset ?
 
 ```{r}
-candies_only_q6 <- select(full_candy, -year, -age, -going_out,
-                       -country)
 
-candies_only_long_q6  <- pivot_longer(candies_only,
-                                   cols = c(1:97),
-                                   names_to = "candy",
-                                   values_to = "feelings"
-                                   )
+# selecting for candies, gender, year and country
+
+candies_only_q6 <- select(full_candy, -age, -going_out)
+
+
+# changing order so gender column is first
+
+candies_only_q6 <- candies_only_q6 %>% 
+  relocate(gender, .before = butterfinger) %>%
+   relocate( year, .after = gender) %>% 
+   relocate(country, .after = year)
+  
+
+
+# new df with gender, feelings and candy
+
+candies_only_q6_long <- candies_only_q6 %>% 
+  pivot_longer(
+              cols = c(4:100),
+              names_to = "candy",
+              values_to = "feelings")
+
+
+# duplicated feelings column
+
+candies_only_q6_long$rating = candies_only_q6_long$feelings
+
+
+rating_count_full_candy <- candies_only_q6_long %>% 
+  count(candy, rating, year, gender,country)  %>% 
+  mutate ( gender = case_when(gender == "I'd rather not say" ~ NA_character_ ,
+                              gender == "Other" ~ NA_character_,
+                              gender == "NA" ~ NA_character_,
+                              TRUE ~ gender))
+
+
+
+# converting the rating column to -1. 1, and 0 
+
+rating_count_full_candy_new <- rating_count_full_candy %>% 
+  mutate(rating = case_when(rating == "DESPAIR" ~ "-1",
+                            rating == "JOY" ~ "1",
+                            rating == "MEH" ~ "0",
+                            TRUE ~ rating))
+
+ # converting rating column to numeric
+
+rating_count_full_candy_new_numeric <- rating_count_full_candy_new %>% 
+  mutate(rating = as.numeric(rating))
+
+# calculating the sum of rating for each candy per gender
+
+popular_candy_by_gender <- rating_count_full_candy_new_numeric %>% 
+  filter( rating == -1 | rating == 1 |rating == 0) %>% 
+  mutate( new_rating = rating * n ) %>% 
+group_by(candy, gender) %>%
+summarise(sum_rating = sum(new_rating)) 
+  
+
+# reordering the table descendant to see the highest rated candy
+
+male_popular_candy <- popular_candy_by_gender %>% 
+ filter( gender == "Male") %>% 
+arrange(desc(sum_rating))
+
+female_popular_candy <- popular_candy_by_gender %>% 
+ filter( gender == "Female") %>% 
+arrange(desc(sum_rating))
+
+male_popular_candy
+female_popular_candy
+
+
+# most popular
+# any_full_sized_candy_bar	Male	1584	
+# any_full_sized_candy_bar	Female	875
+
+# second place
+# reeses_peanut_butter_cups	Male	1443
+# reeses_peanut_butter_cups	Female	768
+
 ```
+
+
+
+Question 7
+What was the most popular candy bar in each year?
+
+
+```{r}
+popular_candy_by_year <- rating_count_full_candy_new_numeric %>% 
+  filter( rating == -1 | rating == 1 |rating == 0) %>% 
+  mutate( new_rating = rating * n ) %>% 
+group_by(candy, year) %>%
+summarise(sum_rating = sum(new_rating)) 
+
+popular_candy_by_year
+
+popular_candy_2015 <- popular_candy_by_year %>% 
+ filter(year == "2015") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_2016 <- popular_candy_by_year %>% 
+ filter(year == "2016") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_2017 <- popular_candy_by_year %>% 
+ filter(year == "2017") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_2015 # 4,603 for any full sized candy bar, 4,375 for reeses peanut candy bar
+
+popular_candy_2016 # 1,037 for any full sized candy bar, 920 for kitkat
+
+popular_candy_2017 # 1,542 for any full sized candy bar, 1,403 for reeses peanut candy bar
+
+# I want to check the answer is correct:
+# Overall rating for any full sized candy bar is:
+
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  filter(candy == "any_full_sized_candy_bar", feelings == "JOY") # 7,589
+
+candies_grouped %>% 
+  select(candy, feelings, n) %>% 
+  filter(candy == "any_full_sized_candy_bar", feelings == "DESPAIR")# 407 so JOY - DESPAIR = 7,182
+
+# Total of popular candy = 4,603 + 1,037 + 1,542 = 7,182 - YAY!
+
+
+```
+
+
+
+Question 8
+What was the most popular candy bar by this rating for people in US, Canada, UK, and all other countries?
+
+
+```{r}
+# For USA:
+
+popular_candy_by_country <- rating_count_full_candy_new_numeric %>% 
+  filter( rating == -1 | rating == 1 | rating == 0 ) %>% 
+  mutate( new_rating = rating * n ) %>% 
+group_by(candy, country) %>%
+summarise(sum_rating = sum(new_rating)) 
+
+popular_candy_by_country
+
+popular_candy_USA <- popular_candy_by_country %>% 
+ filter(country == "USA") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_USA # 2,172  for any full sized candy bar, 1,983 for reeses peanut butter cups
+
+popular_candy_UK <- popular_candy_by_country %>% 
+ filter(country == "UK") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_UK # 33 for any full sized candy bar, lindt truffle, rolos, toblerone
+
+popular_candy_Canada <- popular_candy_by_country %>% 
+ filter(country == "Canada") %>% 
+arrange(desc(sum_rating))
+
+popular_candy_Canada # 252 for any full sized candy bar, 230 for kitkat
+
+
+popular_candy_by_country_other <- rating_count_full_candy_new_numeric %>% 
+  filter(!is.na(country)) %>%
+  filter(country != "USA" & country != "Canada" & country != "UK") %>% 
+  filter( rating == -1 | rating == 1 |rating == 0) %>% 
+  mutate( new_rating = rating * n ) %>% 
+  group_by(candy) %>%
+  summarise(sum_rating = sum(new_rating)) %>% 
+  arrange(desc(sum_rating))
+
+# most popular candy bar for other countries is any_full_sized_candy_bar	65	
+
+
+```
+
 
 
