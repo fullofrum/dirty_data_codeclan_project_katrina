@@ -3,13 +3,6 @@ title: "Task 4 Report"
 output: html_document
 date: "2023-03-15"
 ---
-For your chosen task to present we would like you to write a markdown report document describing your project. This document should include:
-
-A brief introduction to the dataset
-A list of any assumptions you have made
-The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).
-The answers to the questions presented in the task brief
-Any other interesting analyses or conclusions you come across.
 
 
 Introduction
@@ -22,7 +15,7 @@ The inital cleaning process involved passing all the datasets through Janitor cl
 <!-- first_clean_2015 <- clean_names(boing_boing_candy_2015) -->
 
 
-We had several discussions about our remit as data analysts before we started cleaning the data.  Included in the data sets were information outwith the topic of 'candy' including drinks (eg. kale smoothie and mint julep), drugs (vicadin) and bread products (white bread).  We decided to remove any item which was not a sweet or something that could conceivably be given to Trick or Treaters.  This meant keeping food related items including healthy_fruit and box_o_raisins since some parents like to give Trick or Treaters and option to be more healthy.  The rest of the food columns and columns which seemed irrelevant to the dataset (Real Housewives of Orange County Season 9 Blue-Ray) were removed.
+We had several discussions about our remit as data analysts before we started cleaning the data.  Included in the data sets were information outwith the topic of 'candy' including drinks (eg. kale smoothie and mint julep), drugs (vicodin) and bread products (white bread).  We decided to remove any item which was not a sweet or something that could conceivably be given to Trick or Treaters.  This meant keeping food related items including healthy_fruit and box_o_raisins since some parents like to give Trick or Treaters and option to be more healthy.  The rest of the food columns and columns which seemed irrelevant to the dataset (eg. Real Housewives of Orange County Season 9 Blue-Ray) were removed.
 
 
 <!-- second_clean_2017 <- first_clean_2017[ -c(1,12,21,22,26,27,31,43,46,48,49,68,69,72,81,92,96,104,105,107,108,112:120) ] -->
@@ -33,7 +26,9 @@ Two of the datasets had a timestamp which contained a year - the year data was e
 <!-- colnames(second_clean_2017) <- gsub("^.{3}", "", colnames(second_clean_2017)) -->
 
 
-We used an excel sheet to visualise all the different naming conventions across the 3 datasets and set about standardising them to enable the 3 datasets to be joined successfully.
+We used an excel sheet to visualise all the different naming conventions across the 3 datasets and set about standardising them to enable the 3 datasets to be joined successfully.  There were several situtions where there were multiple versions/flavours of the same sweets eg jolly_ranchers_good_flavor and jolly_ranchers_bad_flavor and blue/red/grees/peanut/regular M&Ms.  We decided to keep these as separate entities since some people have a strong preference for a colour or flavour of sweet.  
+
+The exceptions to this was for the sweet Mary Janes .  In the 2015 and 2016 dataset, there was a sweet was labeled as  "anonymous_brown_globs_that_come_in_black_and_orange_wrappers" and another one labelled "mary_janes" however in the 2017 dataset that this was listed as "anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes".  We renamed the data in 2015 and 2016 to mary_janes and mary_janes2 instead of combining them, but during the analysis carried out a manual check to make sure that combining these two variable wouldn't have changed the outcome of the analysis. 
 
 
 <!-- third_clean_2017 <- second_clean_2017 %>%  -->
@@ -53,10 +48,122 @@ We used an excel sheet to visualise all the different naming conventions across 
 <!--   ) -->
 
 We noticed that the age column was as a chr so we changed that to an integer then started the mammtoth task of cleaning the county data.  Our approach was as follows:
-1. Searched for country names within each dataset
+1. Searched for unique country names within each dataset
 2. There were so many variations of capital and lower case letters - we ran the str_to_lower function to make our lives a bit easier!
-3. Random responses were changed to NAs
+3. Random responses such as "fear and loathing" and "unhinged states" and were changed to NAs
+4. All variations of a single country were inserted into a vector and this was used to change all variations to a consitant naming format
+5. The initial letters of countries which were changed to lower case during the str_to_lower step were reverted to uppercase to allow for searching further down the line.
+
+
+<!-- fourth_clean_2017 <- third_clean_2017 %>%  -->
+<!--   mutate(country = as.character(country)) %>%  -->
+<!--   mutate(country = case_when( -->
+<!--       country ==  "fear and loathing"| -->
+<!--       country ==  "unhinged states" ~ NA_character_,  -->
+<!--     TRUE ~ country -->
+<!--   )) -->
+
+<!-- USA_names <-  c("alaska","'merica","ahemamerca","america","california", -->
+<!--                 "i pretend to be from canada, but i am really from the united states", -->
+<!--                 "murica","murrika","n america","new jersey","new york","north carolina", -->
+<!--                 "pittsburgh","the united states","the united states of america","trumpistan", -->
+<!--                 "u s","u s a","unied states","unite states","united sates","united staes", -->
+<!--                 "united state","united statea","united stated","united states","united states of america", -->
+<!--                 "united statss","united ststes","unites states","us","us of a", -->
+<!--                 "usa","usa usa usa!!!!","usa! usa! usa!","usa? hard to tell anymore", -->
+<!--                 "usaa","usas","usausausa","ussa","u.s.a.") -->
+
+<!-- fifth_clean_2017 <- fourth_clean_2017 %>%  -->
+<!--   mutate(country = case_when(country %in% USA_names ~ "USA" -->
+<!--                             TRUE  ~ as.character(country))) -->
+
+
+Analysis
+
+Question 1
+What is the total number of candy ratings given across the three years. (Number of candy ratings, not the number of raters. Don’t count missing values)
+
+ 629523 
+
+
+Question 2
+What was the average age of people who are going out trick or treating?
+
+ 35.01952 
+
+
+Question 3
+What was the average age of people who are not going trick or treating?
+
+ 39.14549 
+
+
+Question 4
+For each of joy, despair and meh, which candy bar received the most of these ratings?
+
+ JOY : any_full_sized_candy_bar	- 	7589
+ MEH: lollipops	- 1570
+ DESPAIR: broken_glow_stick -	7905	nb. we weren't sure if this was candy or not so the actual answer might be          gum_from_baseball_cards	DESPAIR	7341	
+ 
+ 
+ Question 5
+How many people rated Starburst as despair?
+
+starburst	DESPAIR	1990
+
+Question 6
+What was the most popular candy bar by this rating system for each gender in the dataset?
+
+ Most Popular
+ any_full_sized_candy_bar	Male	1584	
+ any_full_sized_candy_bar	Female	875 
+
+Second Place -->
+ reeses_peanut_butter_cups	Male	1443 
+ reeses_peanut_butter_cups	Female	768 
 
 
 
+Question 7
+What was the most popular candy bar in each year?
+
+For 2015: Most popular was any_full_sized_candy_bar (4,603)
+    Second place: 4,375 for reeses_peanut_candy_bar 
+
+For 2016: Most popular was any_full_sized_candy_bar (1,037)
+    Second place: 920 for kitkat 
+
+For 2017: Most popular was any_full_sized_candy_bar  (1,542)
+    Second place: 1,403 for reeses_peanut_candy_bar
+
+
+
+Question 8
+What was the most popular candy bar by this rating for people in US, Canada, UK, and all other countries?
+
+For USA:  Most popular was any_full_sized_candy_bar (2,172)   
+         Second place: 1,983 for reeses peanut butter cups
+         
+For UK:  Most popular was  a four way tie   any_full_sized_candy_bar (33)		
+                                            lindt_truffle	(33)		
+                                            rolos	(33)		
+                                            toblerone (33) 
+                                            
+For Canada:  Most popular was any_full_sized_candy_bar (252)		
+             Second place:    kit_kat	(230)
+                                            
+For other countries:  Most popular was any_full_sized_candy_bar	(65)			
+                      Second plance kit_kat	(49)
+                      
+                      
+                      
+                      
+Conclusions
+By far the most popular candy bar was any_full_size_candy_bar.  It came out top for both males and females, and over all 3 years data were collected.  It was also the favourite candy for data analysed for UK, USA and Canada individually as well as all the other countries combined.
+Reeces products were also very popular.  The peanut butter cups were rated second favourite by both males and females and the peanut candy bar was second favourite in both 2015 and 2017.  This could be because the majority of the data was gathered from North America - 95% of respondants who specified their country came from North America (3429 USA + Canada of 3595)
+Respondants rated lollipops top for being MEH and broken glow sticks and gum from basketball cards had the highest DESPAIR rating.
+There was very little difference between the average age of people going out and staying in:  35 years vs 39 years.  
+When it came to analsying the most popular candy bar for each gender, there were twice as many male respondants to female respondants (1584 vs 875).  This was mirrored within the dataset with 1248 people identifying as female and 2261 as male.  It should be noted that there was only gender data for 2 of the 3 datasets - there was no gender information given for 2015.
+Although the ever popular any_full_size_candy_bar rated highly for the UKs favourite sweet, it had the same rating as lindt_truffle, rolos and toblerone.  There were significantly fewer respondants who named their country as UK (61 vs 3085 for USA)
+                                            
 

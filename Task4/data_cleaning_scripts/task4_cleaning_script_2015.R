@@ -1,4 +1,20 @@
+library(tidyverse)
+library(janitor)
+library(tidyr)
+library(readxl)
+library(lubridate)
+library(here)
 
+boing_boing_candy_2015 <- read_xlsx(here::here("raw_data/boing-boing-candy-2015.xlsx"))
+
+
+first_clean_2015 <- clean_names(boing_boing_candy_2015)
+
+
+glimpse(first_clean_2015)
+
+
+col_names_2015 <- colnames(first_clean_2015)
 
 
 
@@ -49,6 +65,6 @@ third_clean_2015$age <- as.integer(third_clean_2015$age)
 third_clean_2015 <- third_clean_2015[ -c(1)]
 
 
-
+write.csv(third_clean_2015, "clean_data/candy_2015.csv", row.names = FALSE)
 
 

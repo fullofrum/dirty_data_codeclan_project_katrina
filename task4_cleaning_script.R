@@ -235,5 +235,11 @@ test_join_full <- full_join(test_join_2015_2016, sixth_clean_2017)
 full_candy <- test_join_full
 write.csv(full_candy, "clean_data/full_candy.csv", row.names = FALSE)
 
+full_candy %>% 
+  group_by(country) %>% 
+  count(country) %>% 
+  print(n = 38) 
+  
+
 
 
