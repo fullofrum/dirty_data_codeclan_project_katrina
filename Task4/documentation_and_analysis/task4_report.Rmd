@@ -160,10 +160,10 @@ For other countries:  Most popular was any_full_sized_candy_bar	(65)
                       
 Conclusions
 By far the most popular candy bar was any_full_size_candy_bar.  It came out top for both males and females, and over all 3 years data were collected.  It was also the favourite candy for data analysed for UK, USA and Canada individually as well as all the other countries combined.
-Reeces products were also very popular.  The peanut butter cups were rated second favourite by both males and females and the peanut candy bar was second favourite in both 2015 and 2017.  This could be because the majority of the data was gathered from North America - 95% of respondants who specified their country came from North America (3429 USA + Canada of 3595)
-Respondants rated lollipops top for being MEH and broken glow sticks and gum from basketball cards had the highest DESPAIR rating.
+Reeces products were also very popular.  The peanut butter cups were rated second favourite by both males and females and the peanut candy bar was second favourite in both 2015 and 2017.  This could be because the majority of the data was gathered from North America - 95% of respondents who specified their country came from North America (3429 USA + Canada of 3595)
+Respondents rated lollipops top for being MEH and broken glow sticks and gum from basketball cards had the highest DESPAIR rating.
 There was very little difference between the average age of people going out and staying in:  35 years vs 39 years.  
-When it came to analsying the most popular candy bar for each gender, there were twice as many male respondants to female respondants (1584 vs 875).  This was mirrored within the dataset with 1248 people identifying as female and 2261 as male.  It should be noted that there was only gender data for 2 of the 3 datasets - there was no gender information given for 2015.
-Although the ever popular any_full_size_candy_bar rated highly for the UKs favourite sweet, it had the same rating as lindt_truffle, rolos and toblerone.  There were significantly fewer respondants who named their country as UK (61 vs 3085 for USA)
+When it came to analysing the most popular candy bar for each gender, there were twice as many male respondents to female respondents (1584 vs 875).  This was mirrored within the dataset with 1248 people identifying as female and 2261 as male.  It should be noted that there was only gender data for 2 of the 3 datasets - there was no gender information given for 2015.
+Although the ever popular any_full_size_candy_bar rated highly for the UKs favourite sweet, it had the same rating as lindt_truffle, rolos and toblerone.  There were significantly fewer respondents who named their country as UK (61 vs 3085 for USA)
                                             
 

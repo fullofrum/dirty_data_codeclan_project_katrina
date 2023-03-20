@@ -472,7 +472,9 @@ sixth_clean_2017 <-  select (fifth_clean_2017, -state_province_county_etc, -joy_
 
 
 
-
+write.csv(third_clean_2015, "clean_data/candy_2015.csv", row.names = FALSE)
+write.csv(third_clean_2015, "clean_data/candy_2015.csv", row.names = FALSE)
+write.csv(third_clean_2015, "clean_data/candy_2015.csv", row.names = FALSE)
 
 
 
