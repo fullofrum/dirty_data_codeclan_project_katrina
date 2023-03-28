@@ -1,0 +1,121 @@
+---
+title: "task4_analysis"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(readxl)
+library(here)
+library(stringr)
+library(ggplot2)
+library(RColorBrewer)
+
+
+cakes_clean <- read.csv(here::here("clean_data/cakes.csv"))
+```
+
+
+
+
+
+
+
+Which cake has the most cocoa in it?
+```{r}
+cakes_clean %>% 
+  filter(ingredient == "Cocoa") %>% 
+  arrange("Cocoa") %>% 
+  na.omit() %>% 
+  top_n(1, measurement)
+```
+
+
+
+For sponge cake, how many cups of ingredients are used in total?
+
+```{r}
+cakes_clean %>% 
+  filter(cake == "Sponge", measure == "cup") %>% 
+  summarise(sum = sum(measurement))
+
+
+```
+
+
+
+How many ingredients are measured in teaspoons?
+
+```{r}
+cakes_clean %>% 
+  filter(measure == "teaspoon") %>% 
+  summarise(count = n_distinct(ingredient))
+ 
+```
+
+
+
+Which cake has the most unique ingredients?
+```{r}
+cakes_clean %>% 
+  group_by(cake) %>% 
+  summarise(count = n_distinct(ingredient)) %>% 
+  arrange(count) %>% 
+  top_n(1, count)
+  
+  
+```
+
+
+
+Which ingredients are used only once?
+```{r}
+cakes_clean %>% 
+  select(ingredient, cake) %>% 
+  group_by(ingredient) %>% 
+  summarise(count = n_distinct(cake)) %>% 
+  filter(count == 1)
+  
+  
+  
+  
+```
+
+
+Visualisations
+
+Number of cakes with more than 8 ingredients
+
+
+```{r}
+lots_of_ingredients <- cakes_clean %>% 
+  select(ingredient, cake) %>% 
+  group_by(cake) %>% 
+  summarise(count = n_distinct(ingredient)) %>% 
+  filter(count >= 8)
+
+display.brewer.all()
+
+
+ggplot(lots_of_ingredients, aes(cake, count, fill = count))  +
+  #scale_fill_brewer(palette = "Spectral") +
+  scale_fill_distiller(palette = "Spectral") +
+  geom_col() +
+  coord_flip() +
+  xlab("\nCakes") +
+  ylab("Number of Ingredients") +
+  ggtitle("Number of Ingredients per Cake",
+          subtitle = "The complicated ones") +
+  labs(fill = "Ingredients") 
+```
+
+Cakes with the most ‘one’ ingredients
+
+
+```{r}
+
+```
+
+
