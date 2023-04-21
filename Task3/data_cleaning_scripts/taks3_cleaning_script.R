@@ -51,6 +51,16 @@ birds_joined <- left_join(bird_data_remove, ship_data_remove, by = "record_id")
 
 
 write.csv(birds_joined, "clean_data/birds_joined.csv") #press tab to get the file path
- 
 
+
+
+
+
+unique(birds_joined$species_common_name)
+
+
+regex_test <- birds_joined %>%
+  mutate(common_names = str_replace_all(species_common_name, " [A-Z][A-Z]+", ""))
+
+unique(regex_test$common_names)
 

@@ -5,4 +5,22 @@ date: "2023-03-28"
 ---
 
 
+For each question where we ask for bird names, give the bird’s common name, scientific name and species abbreviation.
+
+
+Which bird had the highest total count?
+Which bird had the highest total count above a latitude of -30?
+How many different types of birds were only ever seen in groups of 1?
+How many penguins were seen? (Hint: there are many types of penguin)
+
+
+Which bird had the most individual sightings?
+
+```{r}
+birds_joined %>% 
+  select(species_common_name, species_scientific_name, species_abbreviation) %>% 
+  summarise(count()) %>% 
+  top_n(1, count)
+
+```
 
